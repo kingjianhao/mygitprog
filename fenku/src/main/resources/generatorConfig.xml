@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/fenku" driverClass="com.mysql.jdbc.Driver" password="admin123" userId="root" />
+   <!--  <javaModelGenerator targetPackage="com.kingfly.dao" targetProject="fenku" />
+    <sqlMapGenerator targetPackage="com.kingfly.mapping" targetProject="fenku" />
+    <javaClientGenerator targetPackage="com.kingfly.mapping" targetProject="fenku" type="XMLMAPPER" />-->
+	
+	<!-- 生成模型的包名和位置-->    
+        <javaModelGenerator targetPackage="com.kingfly.domain" targetProject="fenku">    
+            <property name="enableSubPackages" value="true"/>    
+            <property name="trimStrings" value="true"/>    
+        </javaModelGenerator>    
+        <!-- 生成映射文件的包名和位置-->    
+        <sqlMapGenerator targetPackage="com.kingfly.mapping" targetProject="fenku">    
+            <property name="enableSubPackages" value="true"/>    
+        </sqlMapGenerator>    
+        <!-- 生成DAO的包名和位置-->    
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.kingfly.IDao" targetProject="fenku">    
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>
+	
+	
+	<table tableName="base_configuration" domainObjectName="BaseConfiguration" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="cust_info" domainObjectName="CustInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="cust_task" domainObjectName="CustTask" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="file_local_channel" domainObjectName="FileLocalChannel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="file_source_channel" domainObjectName="FileSourceChannel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="market" domainObjectName="Market" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="market_file" domainObjectName="MarketFile" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="pickup_rule" domainObjectName="PickupRule" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="settle" domainObjectName="Settle" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="sh_seat" domainObjectName="Shseat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="szt" domainObjectName="Szt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="task" domainObjectName="Task" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+  </context>
+</generatorConfiguration>
