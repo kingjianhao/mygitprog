@@ -1,5 +1,8 @@
 package test;
 
+
+import java.util.List;
+
 import javax.annotation.Resource;  
 
 import org.apache.log4j.Logger;  
@@ -13,6 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
   
 import com.alibaba.fastjson.JSON;
 import com.kingfly.domain.Shseat;
+import com.kingfly.domain.SourceFile;
+import com.kingfly.service.IPickupFileService;
 import com.kingfly.service.IShseatService;  
  
   
@@ -24,7 +29,8 @@ public class TestMyBatis {
 //  private ApplicationContext ac = null;  
     @Resource  
     private IShseatService shseatService = null;  
-  
+    @Resource  
+    private IPickupFileService pickupFileService = null;  
 //  @Before  
 //  public void before() {  
 //      ac = new ClassPathXmlApplicationContext("applicationContext.xml");  
@@ -39,10 +45,22 @@ public class TestMyBatis {
         logger.info(JSON.toJSONString(user));  
     }
     
-    /*@Test  
+    @Test  
     public void test2() {  
     	shseatService.addShseat("20959", "junit 你好啊3");
         Shseat user = shseatService.getShseatByShSeatNo("20959"); 
         logger.info(JSON.toJSONString(user));  
-    }*/
+    }
+    
+    @Test  
+    public void test3() {  
+    	String fileType="xydata";
+        List<SourceFile> result = pickupFileService.getSourceFileListByFileType(fileType);
+        //List<SourceFile> result = pickupFileService.getSourceFileList();
+        // System.out.println(user.getUserName());  
+        // logger.info("值："+user.getUserName());
+        for(int i=0;i<result.size();i++) {
+        	logger.info(JSON.toJSONString(result.get(i)));
+        }
+    }
 }

@@ -12,8 +12,8 @@
     <!-- 自动扫描 -->  
     <context:component-scan base-package="com.kingfly" />
     <context:component-scan base-package="com.kingfly.IDao" />
+    <context:component-scan base-package="com.kingfly.controller" /> 
     <context:component-scan base-package="com.kingfly.service.impl" />
-    <context:component-scan base-package="com.kingfly.controller" />  
     <!-- 引入配置文件 -->  
     <bean id="propertyConfigurer"  
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
@@ -51,6 +51,11 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
     </bean>  
   
+  	<!-- 在会话工厂中取出SqlSessionTemplate这个对象 -->  
+     <bean id="sqlsessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">  
+        <constructor-arg index="0" ref="sqlSessionFactory" />   
+    </bean>  
+    
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
     <bean id="transactionManager"  
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
