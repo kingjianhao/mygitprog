@@ -71,7 +71,7 @@ CREATE TABLE cust_info(
     sh_seat_NO               CHAR(5)        NOT NULL,
     `settle _no`             CHAR(5)        NOT NULL,
     szt_NO                   CHAR(5)        NOT NULL,
-    true_file_name           VARCHAR(40)    NOT NULL,
+    true_file_name           VARCHAR(200)    NOT NULL,
     `clearing _NO`           CHAR(5)        NOT NULL,
     custname                 VARCHAR(20)    NOT NULL,
     sh_account_NO            CHAR(10),
@@ -219,7 +219,7 @@ CREATE TABLE szt(
 CREATE TABLE task(
     task_id           INT            NOT NULL,
     task_date         CHAR(8)        NOT NULL,
-    true_file_name    VARCHAR(40)    NOT NULL,
+    true_file_name    VARCHAR(200)    NOT NULL,
     task_status       CHAR(2)        NOT NULL,
     task_desc         VARCHAR(30)    NOT NULL,
     PRIMARY KEY (task_id, task_date)
