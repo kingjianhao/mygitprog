@@ -4,7 +4,7 @@
 -- Project :      fenku.DM1
 -- Author :       King
 --
--- Date Created : Sunday, April 08, 2018 20:53:37
+-- Date Created : Monday, April 09, 2018 22:15:29
 -- Target DBMS : MySQL 5.x
 --
 
@@ -54,9 +54,9 @@ CREATE TABLE base_configuration(
 --
 
 CREATE TABLE clearing(
-    `clearing _NO`              CHAR(5)        NOT NULL,
-    `clearing _NO_description`  VARCHAR(30)    NOT NULL,
-    PRIMARY KEY (`clearing _NO`)
+    clearing_NO                CHAR(5)        NOT NULL,
+    clearing_NO_description    VARCHAR(30)    NOT NULL,
+    PRIMARY KEY (clearing_NO)
 )
 ;
 
@@ -67,19 +67,19 @@ CREATE TABLE clearing(
 --
 
 CREATE TABLE cust_info(
-    cust_NO                  CHAR(10)       NOT NULL,
-    sh_seat_NO               CHAR(5)        NOT NULL,
-    `settle _no`             CHAR(5)        NOT NULL,
-    szt_NO                   CHAR(5)        NOT NULL,
+    cust_NO                  CHAR(10)        NOT NULL,
+    sh_seat_NO               CHAR(5)         NOT NULL,
+    `settle _no`             CHAR(5)         NOT NULL,
+    szt_NO                   CHAR(5)         NOT NULL,
     true_file_name           VARCHAR(200)    NOT NULL,
-    `clearing _NO`           CHAR(5)        NOT NULL,
-    custname                 VARCHAR(20)    NOT NULL,
+    clearing_NO              CHAR(5)         NOT NULL,
+    custname                 VARCHAR(20)     NOT NULL,
     sh_account_NO            CHAR(10),
     sz_account_NO            CHAR(10),
-    send_type                CHAR(1)        NOT NULL,
+    send_type                CHAR(1)         NOT NULL,
     send_type_description    VARCHAR(10),
     mail_address             VARCHAR(40),
-    PRIMARY KEY (cust_NO, sh_seat_NO, `settle _no`, szt_NO, true_file_name, `clearing _NO`)
+    PRIMARY KEY (cust_NO, sh_seat_NO, `settle _no`, szt_NO, true_file_name, clearing_NO)
 )ENGINE=MYISAM
 ;
 
@@ -90,8 +90,8 @@ CREATE TABLE cust_info(
 --
 
 CREATE TABLE cust_task(
-    cust_NO           CHAR(10)       NOT NULL,
-    true_file_name    VARCHAR(40)    NOT NULL,
+    cust_NO           CHAR(10)        NOT NULL,
+    true_file_name    VARCHAR(200)    NOT NULL,
     PRIMARY KEY (cust_NO, true_file_name)
 )ENGINE=MYISAM
 ;
@@ -217,11 +217,11 @@ CREATE TABLE szt(
 --
 
 CREATE TABLE task(
-    task_id           INT            NOT NULL,
-    task_date         CHAR(8)        NOT NULL,
+    task_id           INT             NOT NULL,
+    task_date         CHAR(8)         NOT NULL,
     true_file_name    VARCHAR(200)    NOT NULL,
-    task_status       CHAR(2)        NOT NULL,
-    task_desc         VARCHAR(30)    NOT NULL,
+    task_status       CHAR(2)         NOT NULL,
+    task_desc         VARCHAR(30)     NOT NULL,
     PRIMARY KEY (task_id, task_date)
 )
 ;
@@ -232,29 +232,29 @@ CREATE TABLE task(
 -- TABLE: cust_info 
 --
 
-ALTER TABLE cust_info ADD CONSTRAINT Refcust_task61 
+ALTER TABLE cust_info ADD CONSTRAINT Refcust_task6 
     FOREIGN KEY (cust_NO, true_file_name)
     REFERENCES cust_task(cust_NO, true_file_name)
 ;
 
-ALTER TABLE cust_info ADD CONSTRAINT Refsh_seat71 
+ALTER TABLE cust_info ADD CONSTRAINT Refsh_seat7 
     FOREIGN KEY (sh_seat_NO)
     REFERENCES sh_seat(sh_seat_NO)
 ;
 
-ALTER TABLE cust_info ADD CONSTRAINT Refsettle81 
+ALTER TABLE cust_info ADD CONSTRAINT Refsettle8 
     FOREIGN KEY (`settle _no`)
     REFERENCES settle(`settle _no`)
 ;
 
-ALTER TABLE cust_info ADD CONSTRAINT Refszt91 
+ALTER TABLE cust_info ADD CONSTRAINT Refszt9 
     FOREIGN KEY (szt_NO)
     REFERENCES szt(szt_NO)
 ;
 
-ALTER TABLE cust_info ADD CONSTRAINT Refclearing171 
-    FOREIGN KEY (`clearing _NO`)
-    REFERENCES clearing(`clearing _NO`)
+ALTER TABLE cust_info ADD CONSTRAINT Refclearing17 
+    FOREIGN KEY (clearing_NO)
+    REFERENCES clearing(clearing_NO)
 ;
 
 
@@ -262,19 +262,19 @@ ALTER TABLE cust_info ADD CONSTRAINT Refclearing171
 -- TABLE: market_file 
 --
 
-ALTER TABLE market_file ADD CONSTRAINT Refmarket11 
-    FOREIGN KEY (market_id)
-    REFERENCES market(market_id)
-;
-
-ALTER TABLE market_file ADD CONSTRAINT Reffile_source_channel141 
+ALTER TABLE market_file ADD CONSTRAINT Reffile_source_channel14 
     FOREIGN KEY (file_source_channel_id)
     REFERENCES file_source_channel(file_source_channel_id)
 ;
 
-ALTER TABLE market_file ADD CONSTRAINT Reffile_local_channel151 
+ALTER TABLE market_file ADD CONSTRAINT Reffile_local_channel15 
     FOREIGN KEY (file_local_channel_id)
     REFERENCES file_local_channel(file_local_channel_id)
+;
+
+ALTER TABLE market_file ADD CONSTRAINT Refmarket1 
+    FOREIGN KEY (market_id)
+    REFERENCES market(market_id)
 ;
 
 
