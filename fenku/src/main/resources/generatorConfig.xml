@@ -20,8 +20,9 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.kingfly.IDao" targetProject="fenku">    
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>
-	
-	
+		<table tableName="clearing" domainObjectName="Clearing" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+<!-- 
 	<table tableName="base_configuration" domainObjectName="BaseConfiguration" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 	<table tableName="cust_info" domainObjectName="CustInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 	<table tableName="cust_task" domainObjectName="CustTask" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
@@ -33,6 +34,6 @@
 	<table tableName="settle" domainObjectName="Settle" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 	<table tableName="sh_seat" domainObjectName="Shseat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 	<table tableName="szt" domainObjectName="Szt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-	<table tableName="task" domainObjectName="Task" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="task" domainObjectName="Task" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>--> 
   </context>
 </generatorConfiguration>

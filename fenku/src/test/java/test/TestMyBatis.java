@@ -1,10 +1,13 @@
 package test;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
-import javax.annotation.Resource;  
+import javax.annotation.Resource;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.log4j.Logger;  
 import org.junit.Before;  
 import org.junit.Test;  
@@ -62,5 +65,17 @@ public class TestMyBatis {
         for(int i=0;i<result.size();i++) {
         	logger.info(JSON.toJSONString(result.get(i)));
         }
+    }
+    
+    @Test
+    public void test4() {
+    	logger.info(9+DateFormatUtils.format(Calendar.getInstance(), "MMdd").substring(2));
+    	//logger.info(DateFormatUtils.format(Calendar.getInstance(), "MMdd"));
+    }
+    
+    @Test
+    public void test5() {
+    	pickupFileService.initFileList();
+    	//logger.info(DateFormatUtils.format(Calendar.getInstance(), "MMdd"));
     }
 }
