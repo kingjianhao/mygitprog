@@ -20,7 +20,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.kingfly.IDao" targetProject="fenku">    
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>
-		<table tableName="clearing" domainObjectName="Clearing" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="market_file" domainObjectName="MarketFile" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 <!-- 
 	<table tableName="base_configuration" domainObjectName="BaseConfiguration" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>

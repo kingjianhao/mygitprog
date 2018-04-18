@@ -21,7 +21,8 @@ import com.alibaba.fastjson.JSON;
 import com.kingfly.domain.Shseat;
 import com.kingfly.domain.SourceFile;
 import com.kingfly.service.IPickupFileService;
-import com.kingfly.service.IShseatService;  
+import com.kingfly.service.IShseatService;
+import com.kingfly.utils.FenkuUtil;  
  
   
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
@@ -69,8 +70,12 @@ public class TestMyBatis {
     
     @Test
     public void test4() {
-    	logger.info(9+DateFormatUtils.format(Calendar.getInstance(), "MMdd").substring(2));
+    	//logger.info(9+DateFormatUtils.format(Calendar.getInstance(), "MMdd").substring(2));
     	//logger.info(DateFormatUtils.format(Calendar.getInstance(), "MMdd"));
+    	String fileName="abcsj.MDD";
+    	logger.info(fileName.replaceAll("MDD", FenkuUtil.getHexdateString()));
+    	logger.info(fileName);
+
     }
     
     @Test

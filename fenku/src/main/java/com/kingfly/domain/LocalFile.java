@@ -3,9 +3,7 @@ package com.kingfly.domain;
 public class LocalFile {
 	private String marketID;
 	private String path;
-	private String filePrefix;
-	private String fileBZ;
-	private String fileSuffix;
+	private String fileName;
 	public String getMarketID() {
 		return marketID;
 	}
@@ -18,23 +16,11 @@ public class LocalFile {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	public String getFilePrefix() {
-		return filePrefix;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFilePrefix(String filePrefix) {
-		this.filePrefix = filePrefix;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-	public String getFileBZ() {
-		return fileBZ;
-	}
-	public void setFileBZ(String fileBZ) {
-		this.fileBZ = fileBZ;
-	}
-	public String getFileSuffix() {
-		return fileSuffix;
-	}
-	public void setFileSuffix(String fileSuffix) {
-		this.fileSuffix = fileSuffix;
-	}
-	
+
 }

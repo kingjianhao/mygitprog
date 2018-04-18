@@ -28,7 +28,7 @@ import com.kingfly.utils.FenkuUtil;
 
 @Service("pickupFileService")
 public class IPickupFileServiceImpl implements IPickupFileService {
-	
+
 	@Autowired
 	private MarketFileMapper marketFileMapper;
 	@Autowired
@@ -43,116 +43,77 @@ public class IPickupFileServiceImpl implements IPickupFileService {
 	private TaskMapper taskMapper;
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+
 	@Override
 	public void copyFile() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public List<SourceFile> getSourceFileList() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("com.kingfly.IDao.FileSourceChannelMapper.selectSourceFileList");
 	}
+
 	@Override
 	public List<SourceFile> getSourceFileListByFileType(String fileType) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("com.kingfly.IDao.FileSourceChannelMapper.selectSourceFileListByFileType",fileType);
+		return sqlSessionTemplate.selectList("com.kingfly.IDao.FileSourceChannelMapper.selectSourceFileListByFileType",
+				fileType);
 	}
+
 	@Override
 	public List<LocalFile> getLocalFileList() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("com.kingfly.IDao.FileLocalChannelMapper.selectLocalFileList");
 	}
+
 	@Override
 	public List<LocalFile> getLocalFileListByFileType(String fileType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public void initFileList() {
 		// TODO Auto-generated method stub
-		String currDate=DateFormatUtils.format(Calendar.getInstance(), "yyyyMMdd");
-		List<LocalFile> localFileList=getLocalFileList();
-		for(int i=0;i<localFileList.size();i++) {			
-			LocalFile lf=localFileList.get(i);
-			String marketID=lf.getMarketID();
-			String path=lf.getPath();
-			String filePrefix=lf.getFilePrefix();
-			String fileBZ=lf.getFileBZ();
-			String fileSuffix=lf.getFileSuffix();
-			/*StringBuffer sb=new StringBuffer(path);
-			sb.append(filePrefix);*/
-	
-			if(FenkuDomain.SH_MARKET.equalsIgnoreCase(marketID)) {	
-				/*据文件名＝“前缀” ＋“标识” ＋“.” ＋“后缀”；
-				前缀为文件代码，如 zhzl、 jsmx 等；
-				标识＝清算编号|结算代码|其它|空；
-				后缀为数据日期，格式为 mdd 格式，其中 m 表示月， dd 表示日。当月份为 10、 11、 12 月时， m
-				的值分别为‘a’、‘b’、‘c’。
-				如 2001 年 12 月 31 日发送给 JS001 结算参与人的 jsmx 数据的文件名称为“jsmxjs001.c31”。*/
-				//标识
-				if(FenkuDomain.SH_CLEANING_TYPE.equalsIgnoreCase(fileBZ)) {					
-					List<Clearing> clearingList=getClearingList();
-					for(int j=0;j<clearingList.size();j++) {
-						StringBuffer sb=new StringBuffer(path);
-						sb.append(filePrefix);
-						if(filePrefix.trim().equalsIgnoreCase("jsmx01")||
-								filePrefix.trim().equalsIgnoreCase("jsmx02")||
-								filePrefix.trim().equalsIgnoreCase("jsmx03")) {
-							sb.append("_");
-						}
-						sb.append(clearingList.get(j).getClearingNo());
-						sb.append(".");
-						sb.append(FenkuUtil.getHexdateString());
-						Task currentTask=new Task();
-						currentTask.setTaskDate(currDate);
-						currentTask.setTrueFileName(sb.toString());
-						currentTask.setTaskStatus(FenkuDomain.FILE_NOT_COME);
-						currentTask.setTaskDesc("FILE_NOT_COME");
-						taskMapper.insertSelective(currentTask);
-					}
-				}else  if(FenkuDomain.SH_SETTLE_TYPE.equalsIgnoreCase(fileBZ)){
-					List<Settle> settleList=getSettleList();
-					for(int j=0;j<settleList.size();j++) {
-						StringBuffer sb=new StringBuffer(path);
-						sb.append(filePrefix);
-						if(filePrefix.trim().equalsIgnoreCase("jsmx01")||
-								filePrefix.trim().equalsIgnoreCase("jsmx02")||
-								filePrefix.trim().equalsIgnoreCase("jsmx03")) {
-							sb.append("_");
-						}
-						sb.append(settleList.get(j).getSettleNo());
-						sb.append(".");
-						sb.append(FenkuUtil.getHexdateString());
-						Task currentTask=new Task();
-						currentTask.setTaskDate(currDate);
-						currentTask.setTrueFileName(sb.toString());
-						currentTask.setTaskStatus(FenkuDomain.FILE_NOT_COME);
-						currentTask.setTaskDesc("FILE_NOT_COME");
-						taskMapper.insertSelective(currentTask);
-					}
-				}
-			}else if(FenkuDomain.SZ_MARKET.equalsIgnoreCase(marketID)) {
-				/**
-				 * 文件名采用接口名+4 位日期的命名规则+.dbf
-				 */
-				String shortDate=DateFormatUtils.format(Calendar.getInstance(), "MMdd");
-				StringBuffer sb=new StringBuffer(path);
-				sb.append(filePrefix).append(shortDate).append(".DBF");
-				Task currentTask=new Task();
-				currentTask.setTaskDate(currDate);
-				currentTask.setTrueFileName(sb.toString());
-				currentTask.setTaskStatus(FenkuDomain.FILE_NOT_COME);
-				currentTask.setTaskDesc("FILE_NOT_COME");
-				taskMapper.insertSelective(currentTask);
-			}			
+		String currDate = DateFormatUtils.format(Calendar.getInstance(), "yyyyMMdd");
+		String shortDate = DateFormatUtils.format(Calendar.getInstance(), "MMdd");
+		List<LocalFile> localFileList = getLocalFileList();
+		for (int i = 0; i < localFileList.size(); i++) {
+			LocalFile lf = localFileList.get(i);
+			String path = lf.getPath();
+			String fileName = lf.getFileName();
+			String hexdate=FenkuUtil.getHexdateString();
+			StringBuffer sb=new StringBuffer();
+			if(path.indexOf("日期")>=0) {
+				path=path.replaceAll("日期", currDate);
+			}
+			sb.append(path);
+			if(fileName.indexOf("YYYYMMDD")>=0) {
+				fileName=fileName.replaceAll("YYYYMMDD", currDate);
+			}else if(fileName.indexOf("MMDD")>=0) {
+				fileName=fileName.replaceAll("MMDD", shortDate);
+			}else if(fileName.indexOf("MDD")>=0) {
+				fileName=fileName.replaceAll("MDD", hexdate);
+			}
+			sb.append(fileName);
+			Task currentTask=new Task();
+			currentTask.setTaskDate(currDate);
+			currentTask.setTrueFileName(sb.toString());
+			currentTask.setTaskStatus(FenkuDomain.FILE_NOT_COME);
+			currentTask.setTaskDesc("FILE_NOT_COME");
+			taskMapper.insertSelective(currentTask); 
 		}
 	}
+
 	@Override
 	public List<Clearing> getClearingList() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("com.kingfly.IDao.ClearingMapper.selectAllClearing");
 	}
+
 	@Override
 	public List<Settle> getSettleList() {
 		// TODO Auto-generated method stub

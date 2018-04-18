@@ -14,24 +14,18 @@
   <resultMap id="LocalFileResultMap" type="com.kingfly.domain.LocalFile">
   	<result column="market_id" jdbcType="VARCHAR" property="marketID" />
     <result column="file_local_channel_path" jdbcType="VARCHAR" property="path" />
-    <result column="file_prefix" jdbcType="VARCHAR" property="filePrefix" />
-    <result column="file_bz" jdbcType="VARCHAR" property="fileBZ" />
-    <result column="file_suffix" jdbcType="VARCHAR" property="fileSuffix" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
   </resultMap>
   <select id="selectLocalFileList" resultMap="LocalFileResultMap">
   	select flc.file_local_channel_path file_local_channel_path,
   	mf.market_id market_id,
-  	mf.file_prefix file_prefix,
-  	mf.file_bz file_bz,
-  	mf.file_suffix file_suffix from file_local_channel flc,
+  	mf.file_name file_name from file_local_channel flc,
   	market_file mf where flc.file_type=mf.file_type
   </select>
   <select id="selectLocalFileListByFileType" parameterType="java.lang.String" resultMap="LocalFileResultMap">
   	select flc.file_local_channel_path file_local_channel_path,
   	mf.market_id market_id,
-  	mf.file_prefix file_prefix,
-  	mf.file_bz file_bz,
-  	mf.file_suffix file_suffix from file_local_channel flc,
+  	mf.file_name file_name from file_local_channel flc,
   	market_file mf where flc.file_type=mf.file_type and flc.file_type=#{fileType,jdbcType=VARCHAR}
   </select>  
   <sql id="Base_Column_List">

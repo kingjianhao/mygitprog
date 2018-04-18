@@ -4,6 +4,11 @@ public class FenkuDomain {
 	public static final String HEX_DATE_PATTERN="MDD";
 	public static final String DEC_DATE_PATTERN="MMDD";
 	
+	
+	public static final String XYDATA="xydata";
+	public static final String DCOM="D-COM";
+	public static final String REMOTE_MSG="remote_msg";
+	public static final String REMOTE_RPTFILE="remote_rptfile";
 	/*
 	 * 文件状态
 	 */
@@ -30,4 +35,10 @@ public class FenkuDomain {
 	public static final String SH_CLEANING_TYPE="00";
 	//结算会员编号
 	public static final String SH_SETTLE_TYPE="01";
+	//MMDD标志
+	public static final String MMDD_FLAG="MMDD";
+	//YYYYMMDD标志
+	public static final String YYYYMMDD_FLAG="YYYYMMDD";
+	//上海席位
+	public static final String SH_SEAT_TYPE="03";
 }
